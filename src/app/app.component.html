@@ -1,21 +1,64 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container-fluid">
 
-<router-outlet></router-outlet>
+  <div class="row mt-5">
+    <div class="col">
+      <h1>
+        階層構造を持つデータに対する SelectBox の動作サンプル
+      </h1>
+      <div class="grid-container">
+        <select style="grid-row: 1 / -1; grid-column: 1 / 1;" class="select" name="left" [size]="10"
+          (change)="leftSelectedChanged()" [(ngModel)]="leftSelectBoxModel">
+          <option *ngFor="let i of leftList" [value]="i">{{i}}</option>
+        </select>
+        <div style="grid-row: 1; grid-column: 2;">
+          <button style="width: 100%;" class="btn btn-sm btn-secondary" [disabled]="!upButtonEnabled"
+            (click)="moveToUp()">↑</button>
+        </div>
+        <div style="grid-row: 2; grid-column: 2;">
+          <button style="width: 100%;" class="btn btn-sm btn-secondary" [disabled]="!leftSelectBoxModel"
+            (click)="moveToRight()">→</button>
+        </div>
+        <div style="grid-row: 3; grid-column: 2;">
+          <button style="width: 100%;" class="btn btn-sm btn-secondary" [disabled]="!rightSelectBoxModel"
+            (click)="moveToLeft()">←</button>
+        </div>
+        <div style="grid-row: 4; grid-column: 2;">
+          <button style="width: 100%;" class="btn btn-sm btn-secondary" [disabled]="!downButtonEnabled"
+            (click)="moveToDown()">↓</button>
+        </div>
+        <select class="select" name="right" [size]="10" (change)="rightSelectedChanged()"
+          style="grid-row: 1 / -1; grid-column: 3 / 3;" [(ngModel)]="rightSelectBoxModel">
+          <option *ngFor="let i of rightList" [value]="i">{{i}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">
+      <h1>左側の木構造</h1>
+      <div [innerHTML]="leftTreeHtml"></div>
+    </div>
+    <div class="col">
+      <h1>部分木<sup *ngIf="!!selectedSubTreeHtml">※1</sup></h1>
+      <div [innerHTML]="selectedSubTreeHtml"></div>
+      <div *ngIf="!!selectedSubTreeHtml">
+        <small>
+          ※1: 選択されたノード、およびそのすべての子ノードを含む部分木です。
+        </small>
+      </div>
+    </div>
+    <div class="col">
+      <h1>右側の木構造</h1>
+      <div [innerHTML]="rightTreeHtml"></div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">
+      <h1>つくったひと</h1>
+      <div>
+        しだっち
+      </div>
+    </div>
+  </div>

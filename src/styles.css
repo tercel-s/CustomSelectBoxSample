@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "M PLUS Rounded 1c";
+  font-size: 0.8rem;
+}
+
+h1 {
+  font-size: 1.2rem;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  line-height: 1.8;
+  list-style: none;
+}
+
+ul ul {
+  margin-left: 1em;
+}
+
+ul ul li {
+  position: relative;
+  padding-left: 1.15em;
+}
+
+ul ul li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  content: '';
+  border-left: 1px solid #aaa;
+}
+
+ul ul li:last-child::before {
+  height: 0.9em;
+}
+
+ul ul li::after {
+  position: absolute;
+  top: 0.9em;
+  left: 0;
+  width: 0.7em;
+  content: '';
+  border-top: 1px solid #aaa;
+}
